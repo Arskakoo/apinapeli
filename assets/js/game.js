@@ -1,4 +1,3 @@
-// game.js
 let container = document.getElementById('fullscreen-container');
 let monkeySize = 70;
 let startTime;
@@ -6,17 +5,14 @@ let gameRunning = false;
 
 function startGame() {
     if (gameRunning) {
-        // Pelissä jo käynnissä, estä uusi aloitus
         return;
     }
 
     let levelSelect = document.getElementById('level');
     let monkeyCount = parseInt(levelSelect.value);
 
-    // Piilota apinat
     hideMonkeys();
 
-    // Piilota banana-monkey kuva
     let bananaMonkey = document.querySelector('.start-img');
     bananaMonkey.style.display = 'none';
 
@@ -31,7 +27,6 @@ function startGame() {
     startTime = new Date();
     gameRunning = true;
 
-    // Piilota .start-text
     let startText = document.querySelector('.start-text');
     startText.classList.add('start-hidden');
 }
@@ -73,74 +68,53 @@ function checkGameOver() {
         let elapsedTime = (endTime - startTime) / 1000;
         alert(`Hienoa löysit eläintarhan banaaneja syövän apinan. Aikasi oli ${elapsedTime.toFixed(2)} sekunttia.`);
 
-        // Näytä header uudelleen
         let header = document.getElementById('hide');
         header.style.visibility = 'visible';
 
-        // Näytä .start-text uudelleen
         let startText = document.querySelector('.start-text');
         startText.classList.remove('start-hidden');
 
-        // Piilota apinat
         hideMonkeys();
 
-        // Tallenna aika ja taso local storageen
         let levelSelect = document.getElementById('level');
         let selectedLevel = levelSelect.value;
 
-        // Hae aiemmat tulokset tai alusta taulukko
         let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
 
-        // Lisää uusi tulos
         highScores.push({ level: getLevelName(selectedLevel), time: elapsedTime.toFixed(2) });
 
-        // Lajittele tulokset ajan mukaan nousevassa järjestyksessä
         highScores.sort((a, b) => a.time - b.time);
 
-        // Säilytä vain parhaat 5 tulosta
         highScores = highScores.slice(0, 5);
 
-        // Tallenna tulokset local storageen
         localStorage.setItem('highScores', JSON.stringify(highScores));
 
-        // Näytä parhaat tulokset
         showHighScores(highScores);
 
         gameRunning = false;
 
-        // Päivitä sivu automaattisesti
         setTimeout(function () {
             window.location.reload();
-        }, 1); // Voit säätää odotusaikaa tarvittaessa
+        }, 1);
     }
 }
 
 window.onload = function () {
-    // Lataa highscore näkymä
     loadHighScores();
-
-    // Muut koodit tässä...
 }
 
 function loadHighScores() {
-    // Hae aiemmat tulokset tai alusta taulukko
     let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
-
-    // Näytä highscore
     showHighScores(highScores);
 }
 
-// Päivitetty showHighScores-funktio
 function showHighScores(highScores) {
-    // Tyhjennä aiempi näyttö
     let highScoreContainer = document.getElementById('highscore-container');
     highScoreContainer.innerHTML = '';
 
-    // Näytä parhaat tulokset
     let highScoreParagraph = document.createElement('p');
     highScoreParagraph.innerHTML = "<strong>Top 5 huippupisteet:</strong><br>";
 
-    // Näytä enintään viisi parasta tulosta
     let topScores = highScores.slice(0, 5);
 
     topScores.forEach((score, index) => {
@@ -150,7 +124,6 @@ function showHighScores(highScores) {
     highScoreContainer.appendChild(highScoreParagraph);
 }
 
-// Uusi funktio levelin nimen hakemiseen
 function getLevelName(levelValue) {
     if (levelValue === '500') {
         return 'Helppo';
@@ -158,9 +131,9 @@ function getLevelName(levelValue) {
         return 'Normaali';
     } else if (levelValue === '900') {
         return 'Vaikea';
-    } else if (levelValue === '1100') {
+    } else if (levelValue === '1000') {
         return 'Erittäin vaikea';
     } else {
-        return 'Unknown'; // Oletus, jos levelin nimiä ei ole määritetty kaikille arvoille
+        return 'Unknown';
     }
 }
