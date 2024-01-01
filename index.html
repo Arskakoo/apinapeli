@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apina Peli</title>
+    <link rel="shortcut icon" href="assets/img/banana-monkey.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+    <header id="hide">
+        <h1>Apina peli</h1>
+        <div id="highscore-container"></div>
+    </header>
+    <div class="viesti">
+        <span class="material-icons material-symbols-rounded">tv_off</span>
+        <p>Sinun pitää pelata isommalla näytöllä!</p>
+    </div>
+    <main>
+        <div class="start">
+
+            <div class="start-text">
+                <h2>Apina peli</h2>
+                <br>
+                <h4>Auta eläintarhaa löytämään heille kuuluva apina. <br>
+                    Eläintarha etsi apinaa joka tykkää erityisesti banaaneista <br>
+                    Löydä siis apina jolla on banaani klikkaa sitä ja nää kauanko sinulla kesti.
+                    <br>
+                    onnea matkaan etsivä.
+                </h4>
+                <br>
+                <h5>Taso</h5>
+                <select name="level" id="level">
+                    <option value="500">Helppo</option>
+                    <option value="700">Normaali</option>
+                    <option value="900">Vaikea</option>
+                    <option value="1000">Erittäin vaikea</option>
+                </select>
+                <br>
+                <br>
+                <button onclick="startGame()" id="Start-button">Aloita etsintä 🔎</button>
+            </div>
+
+            <div class="start-img">
+                <img src="assets/img/banana-monkey.png" alt="" id="hide">
+            </div>
+
+            <div id="fullscreen-container"></div>
+
+            <script src="assets/js/game.js"></script>
+
+
+        </div>
+    </main>
+    <footer>
+    </footer>
+</body>
+
+</html>
